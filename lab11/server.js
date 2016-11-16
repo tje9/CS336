@@ -26,7 +26,6 @@ app.use('/', express.static(path.join(__dirname, 'dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-var password = "bjarne";
 
 MongoClient.connect('mongodb://cs336:' +password+ '@ds011495.mlab.com:11495/cs336', function (err, dbConnection) {
   if (err) throw err
