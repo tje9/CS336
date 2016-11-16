@@ -1,0 +1,16 @@
+LAB 03 Questions
+
+1) Compare and contrast the purposes of Node.js and of Express.js.
+	-Node.js is a platform for building on the server side. It uses JavaScript to build it.
+	-Express.js is a framework used for building Web-applications
+
+2) Explain the purpose of the packages.json file.
+	-This file contains the data about the app or module. It also has what dependencies to install from npm.
+
+3)Explain the sense in which these files are “static”.
+	-They are static becuase they are held at one location and are not changing. They aren't being created by the server side code.
+
+4)Determine whether the server continues to serve up the hello-world message and explain why this is the case.
+	-It does not because we are telling it to access the file and not root. If we weren't telling it to grab the file then it would serve up "Hello World."
+
+

@@ -1,0 +1,79 @@
+/*
+Trevor Edewaard
+Lab05
+CS336
+.sty file implementing Stylus on my .css file
+*/
+
+/*Declaring variables to use in the body*/
+font-size = 36px
+padding = 20px
+purple = #ccccff
+yellow = #ffeebb
+sideFlex = 1 6 20%
+
+body
+	font: font-size Helvetica
+	background: #999999
+
+	#main 
+		min-height: 800px
+		margin: 0px
+		padding: 0px
+		display: flex
+		flex-flow: row
+
+	#main > article 
+		padding: padding
+		border: 1px solid black
+		background: #dddd88
+		flex: 3 1 60%
+		order: 2
+
+	#main > nav
+		padding: padding
+		border: 1px solid black
+		background: purple
+		flex: sideFlex
+		order: 1
+		text-align: right
+
+	#main > aside 
+		padding: padding
+		border: 1px solid black
+		background: purple
+		flex: sideFlex
+		order: 3
+
+	header
+		display: block
+		padding: padding
+		min-height: 100px
+		border: 1px solid black
+		background: yellow
+		font-size: 150%
+
+	footer 
+		display: block
+		padding: padding
+		min-height: 100px
+		border: 1px solid black
+		background: yellow
+		font-size: 50%
+
+	/* Too narrow to support three columns */
+	@media all and (max-width: 640px)
+		#main, #page
+			flex-direction: column
+
+		#main > article, #main > nav, #main > aside
+			/* Return them to document order */
+			order: 0
+
+		#main > nav, #main > aside, header, footer
+			min-height: 120px/*allows for the writing to stay in box*/
+			max-height: 120px/*upon small screen*/
+
+		#main > nav
+			text-align: left/*This moves the nav text to the left*/
+

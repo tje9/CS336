@@ -1,0 +1,158 @@
+/* numbered paragraphs */
+h3.numbered {counter-reset: mynum;}
+
+/* page font */
+body {
+  font: 16px "Comic Sans MS", cursive;
+  background: url("Blue-rule.png");
+}
+
+/* paragraphs */
+p {
+  color: #00f;
+}
+#first {
+  font-style: italic;
+}
+
+p:before{
+  content: " " url("Yellow-pin.png");
+}
+
+/* initial letters */
+strong {
+  background-color: #ddf; 
+  color: red;
+  font: 200% serif;
+}
+
+.spinach {
+  color: #080;
+  background-color: #ddf;
+}
+
+h3 {border-top: 1px solid gray;}
+
+li {
+  list-style: lower-roman;
+  margin-bottom: 8px;
+  }
+
+/* numbered headings */
+body {counter-reset: headnum;}
+h3:before {
+  content: "(" counter(headnum, upper-latin) ") ";
+  counter-increment: headnum;
+}
+
+p.numbered:before {
+  content: counter(mynum) ": ";
+  counter-increment: mynum;
+  font-weight: bold;
+}
+
+ul {
+  border: 10px solid lightblue;
+  width:  100px;
+}
+
+ul, #numbered {
+  border: 1em solid #69b;
+  padding-right:1em;
+}
+ 
+ul, #numbered {float: left;}
+h3 {clear: left;}
+
+#fixed-pin  {
+  position:fixed;
+  top: 3px;
+  right: 3px;
+}
+
+/*** Style for doc3.html (Tables) ***/
+
+#demo-table {
+  font: 100% sans-serif;
+  background-color: #efe;
+  border-collapse: collapse;
+  empty-cells: show;
+  border: 1px solid #7a7;
+}
+
+#demo-table > caption {
+  text-align: left;
+  font-weight: bold;
+  font-size: 200%;
+  border-bottom: .2em solid #4ca;
+  margin-bottom: .5em;
+}
+
+
+/* basic shared rules */
+#demo-table th,
+
+#demo-table {
+margin-top: 300px;
+margin-left: 10px;
+}
+
+#demo-table td {
+  text-align: right;
+  padding-right: .5em;
+}
+
+#demo-table th {
+  font-weight: bold;
+  padding-left: .5em;
+}
+
+
+/* header */
+#demo-table > thead > tr:first-child > th {
+  text-align: center;
+  color: blue;
+}
+
+#demo-table > thead > tr + tr > th {
+  font-style: italic;
+  color: gray;
+}
+
+/* fix size of superscript */
+#demo-table sup {
+  font-size: 75%;
+}
+
+/* body */
+#demo-table td {
+  background-color: #cef;
+  padding: .5em .5em .5em 3em;
+}
+
+#demo-table tbody th:after {
+  content: ":";
+}
+
+
+/* footer */
+#demo-table tfoot {
+  font-weight: bold;
+}
+
+#demo-table tfoot th {
+  color: blue;
+}
+
+#demo-table tfoot th:after {
+  content: ":";
+}
+
+#demo-table > tfoot td {
+  background-color: #cee;
+}
+
+#demo-table > tfoot > tr:first-child td {
+  border-top: .2em solid #7a7;
+}
+
