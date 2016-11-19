@@ -14,9 +14,9 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <div className="comment">
-        <h2 className="commentAuthor">
-          {this.props.author}
+      <div className="person">
+        <h2 className="personName">
+          ID: {this.props.id}
         </h2>
         <span dangerouslySetInnerHTML={this.rawMarkup()} />
       </div>

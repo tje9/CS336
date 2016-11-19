@@ -5,11 +5,11 @@ import $ from 'jquery';
 
 import '../css/base.css';
 
-import CommentList from './commentlist.js';
-import CommentForm from './commentform.js';
+import PersonList from './personlist.js';
+import PersonForm from './personform.js';
 
 module.exports = React.createClass({
-  loadCommentsFromServer: function() {
+  loadPersonFromServer: function() {
     $.ajax({
       url: this.props.url,
       dataType: 'json',
@@ -22,12 +22,12 @@ module.exports = React.createClass({
       }.bind(this)
     });
   },
-  handleCommentSubmit: function(comment) {
+  handlePersonSubmit: function(person) {
     $.ajax({
       url: this.props.url,
       dataType: 'json',
       type: 'POST',
-      data: comment,
+      data: person,
       success: function(data) {
         this.setState({data: data});
       }.bind(this),
@@ -40,16 +40,16 @@ module.exports = React.createClass({
     return {data: []};
   },
   componentDidMount: function() {
-    this.loadCommentsFromServer();
-    setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+    this.loadPersonsFromServer();
+    setInterval(this.loadPersonsFromServer, this.props.pollInterval);
   },
   render: function() {
     return (
-      <div className="commentBox">
-		//Test upon saving it changes/loads automatically
-        <h1>Commentssss!</h1>
-        <CommentList data={this.state.data} />
-        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+      <div className="personBox">
+        <h1>People!</h1>
+		Refresh Interval is not working :( please start with ID 3.
+        <PersonList data={this.state.data} />
+        <PersonForm onPersonSubmit={this.handlePersonSubmit} />
       </div>
     );
   }

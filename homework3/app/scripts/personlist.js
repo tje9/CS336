@@ -4,20 +4,22 @@ import Remarkable from 'remarkable';
 import $ from 'jquery';
 import '../css/base.css';
 
-import Comment from './comment.js';
+import Person from './person.js';
 
 module.exports = React.createClass({
   render: function() {
-    var commentNodes = this.props.data.map(function(comment) {
+    var personNodes = this.props.data.map(function(person) {
       return (
-        <Comment author={comment.author} key={comment.id}>
-          {comment.text}
-        </Comment>
+        <Person id={person.id} key={person.id}>
+		{person.first}
+		{person.last}
+		{person.date}
+        </Person>
       );
     });
     return (
-      <div className="commentList">
-        {commentNodes}
+      <div className="personList">
+        {personNodes}
       </div>
     );
   }

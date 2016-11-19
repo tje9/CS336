@@ -20,7 +20,7 @@ var MongoClient = require('mongodb').MongoClient
 
 var PASSWORD = "bjarne";
 
-var COMMENTS_FILE = path.join(__dirname, 'comments.json');
+var PERSON_FILE = path.join(__dirname, 'person.json');
 
 app.set('port', (process.env.PORT || 3000));
 
@@ -47,23 +47,25 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/api/comments', function(req, res) {
-  db.collection("lab10").find({}).toArray(function(err, docs) {
+app.get('/api/person', function(req, res) {
+  db.collection("homework3").find({}).toArray(function(err, docs) {
         if (err) throw err;
         res.json(docs);
     });
 });
 
-app.post('/api/comments', function(req, res) {
-  var newComment = {
+app.post('/api/person', function(req, res) {
+  var newPerson = {
         id: Date.now(),
-        author: req.body.author,
-        text: req.body.text,
+		id: req.body.id,
+        first: req.body.first,
+        last: req.body.last,
+		date: req.body.date,
     };
-    db.collection("lab10").insertOne(newComment, function(err, result) {
+    db.collection("homework3").insertOne(newPerson, function(err, result) {
         if (err) throw err;
         var newId = result.insertedId;
-        db.collection("lab10").find({}).toArray(function(err, docs) {
+        db.collection("homework3").find({}).toArray(function(err, docs) {
             if (err) throw err;
             res.json(docs);
         });
