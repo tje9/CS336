@@ -14,26 +14,15 @@ var fs = require('fs');
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
-var app = express();
+var MongoClient = require('mongodb').MongoClient;
 var db;
-var MongoClient = require('mongodb').MongoClient
-
-var COMMENTS_FILE = path.join(__dirname, 'comments.json');
+var app = express();
 
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(path.join(__dirname, 'dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
-
-MongoClient.connect('mongodb://cs336:' + process.env.MONGO_PASSWORD + '@ds011495.mlab.com:11495/cs336', function (err, dbConnection) {
-  if (err) throw err
-
-db = dbConnection;
-
-})
-
 
 // Additional middleware which will set headers that we need on each request.
 app.use(function(req, res, next) {
@@ -46,23 +35,29 @@ app.use(function(req, res, next) {
     next();
 });
 
+MongoClient.connect('mongodb://cs336:' + process.env.MONGO_PASSWORD + '@ds011495.mlab.com:11495/cs336', function (err, dbConnection) {
+  if (err) throw err
+
+db = dbConnection;
+
+})
 app.get('/api/comments', function(req, res) {
-  db.collection("lab10").find({}).toArray(function(err, docs) {
+    db.collection("comments").find({}).toArray(function(err, docs) {
         if (err) throw err;
         res.json(docs);
     });
 });
 
 app.post('/api/comments', function(req, res) {
-  var newComment = {
+    var newComment = {
         id: Date.now(),
         author: req.body.author,
         text: req.body.text,
     };
-    db.collection("lab10").insertOne(newComment, function(err, result) {
+    db.collection("comments").insertOne(newComment, function(err, result) {
         if (err) throw err;
         var newId = result.insertedId;
-        db.collection("lab10").find({}).toArray(function(err, docs) {
+        db.collection("comments").find({}).toArray(function(err, docs) {
             if (err) throw err;
             res.json(docs);
         });
