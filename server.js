@@ -35,14 +35,16 @@ app.use(function(req, res, next) {
     next();
 });
 
-MongoClient.connect('mongodb://cs336:' + process.env.MONGO_PASSWORD + '@ds011495.mlab.com:11495/cs336', function (err, dbConnection) {
+var MONGO_PASSWORD = "bjarne";
+
+MongoClient.connect('mongodb://cs336:' + MONGO_PASSWORD + '@ds011495.mlab.com:11495/cs336', function (err, dbConnection) {
   if (err) throw err
 
 db = dbConnection;
 
 })
 app.get('/api/comments', function(req, res) {
-    db.collection("comments").find({}).toArray(function(err, docs) {
+    db.collection("lab10").find({}).toArray(function(err, docs) {
         if (err) throw err;
         res.json(docs);
     });
@@ -54,10 +56,10 @@ app.post('/api/comments', function(req, res) {
         author: req.body.author,
         text: req.body.text,
     };
-    db.collection("comments").insertOne(newComment, function(err, result) {
+    db.collection("lab10").insertOne(newComment, function(err, result) {
         if (err) throw err;
         var newId = result.insertedId;
-        db.collection("comments").find({}).toArray(function(err, docs) {
+        db.collection("lab10").find({}).toArray(function(err, docs) {
             if (err) throw err;
             res.json(docs);
         });
